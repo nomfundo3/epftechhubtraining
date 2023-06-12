@@ -1,0 +1,32 @@
+<script>
+function isPalidrome(a){
+    if (typeof a !== 'number'){
+        return '${a} is not a number!';
+    }
+    a=a.toString().split('');
+
+    for(var i=0; i<(a.length/2); i++){
+         if(a[i]!==a[a.length-i-1]){
+            return false;
+         }
+
+    }
+    return true;
+}
+
+function largestPalidrome(){
+    let ans=0;
+
+    for(x=999; x>=100; x--){
+         for(y=999;y>=100;y--){
+            let z=x*y;
+            if(isPalidrome(z)&& z>ans){
+                ans=z;
+            }
+         }
+    }
+    return ans;
+}
+console.log(isPalidrome());
+
+</script>
