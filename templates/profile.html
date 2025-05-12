@@ -1,0 +1,101 @@
+{% extends 'app_dashboard.html' %} {% load static%} {%block navbar%}PROFILE{%endblock%}
+<link rel="stylesheet" href="{% static 'css/app_dashboard.css'%}"> {% block content%}
+<div id="page-content-wrapper">
+
+    <div class="container-fluid mt-2">
+        {% for profile in profile %}
+        <div class="card shadow-sm mt-5 rounded-6">
+            <div class="card-body">
+                <h6 class="mb-4 text-danger fw-bold">Edit Profile</h6>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-2">
+                            <label for="fistName" class="form-label text-xxs">First Name:</label>
+                            <input type="text" class="form-control rounded-pill text-xxs" name="first_Name" id="first_Name" placeholder="Enter first name" value="{{profile.user_fk__first_name}}" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-2">
+                            <label for="lastname" class="form-label text-xxs">Last Name:</label>
+                            <input type="text" class="form-control rounded-pill text-xxs" name="last_Name" id="last_Name" placeholder="Enter last name" value="{{profile.user_fk__last_name}}" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label for="email" class="form-label text-xxs">Email Address:</label>
+                    <input type="email" class="form-control rounded-pill text-xxs" name="email" id="email" placeholder="Enter email address" value="{{profile.user_fk__email}}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label text-xs">Phone number:</label>
+                    <input type="text" class="form-control rounded-pill text-xs" name="phone_Number" id="phone_Number" placeholder="Enter phone number" maxlength="10" value="{{profile.phone_number}}" onkeypress="return isNumber(event)" required>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-2">
+                            <label for="identity_number" class="form-label text-xxs">ID Number:</label>
+                            <input type="text" class="form-control rounded-pill text-xxs" name="identity_number" id="identity_number" placeholder="Enter id number"maxlength="13" value="{{profile.identity_number}}" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-2">
+                            <label for="Passport" class="form-label text-xxs">Passport:</label>
+                            <input type="text" class="form-control rounded-pill text-xxs" name="Passport" id="Passport" placeholder="Enter passport" maxlength="9" value="{{profile.Passport}}" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-2">
+                            <label for="date_of_birth" class="form-label text-xxs">Date of birth:</label>
+                            <input type="text" class="form-control rounded-pill text-xxs" name="date_of_birth" id="date_of_birth" placeholder="Enter your birth date" value="{{profile.date_of_birth}}" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="gender" class="form-label text-xxs">Gender:</label>
+                        <select class="form-select rounded-pill pb-3 text-xxs " name="gender" id="gender" required>
+                          <option value="{{profile.gender}}" selected hidden>{{profile.gender}}</option>
+                            <option value="" hidden>Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                          </select>
+                    </div>
+                <div class="mb-2">
+                    <label for="ethnicity" class="form-label text-xxs">Ethnicity</label>
+                    <select class="form-select rounded-pill pb-3 text-xxs " name="ethnicity" id="ethnicity" required>
+                      <option value="{{profile.gender}}" selected hidde>{{profile.ethnicity}}</option>
+                        <option value="" hidden>Select Ethnicity</option>
+                        <option value="African">African</option>
+                        <option value="Coloured">Coloured</option>
+                        <option value="Indian">Indian</option>
+                        <option value="White">White</option>
+                        <option value="Asian">Asian</option>
+                        <option value="female">other</option>
+                      </select>
+                </div>
+                <div class="mb-2">
+                    <label for="address" class="form-label text-xxs">Address:</label>
+                    <textarea class="form-control rounded-pill text-xxs" id="address" name="address" placeholder="Enter your address" rows="4" required>
+    {{profile.address}}
+                    </textarea>
+                </div>
+                
+                               
+                <div class="form-btns d-flex justify-content-center mt-4">
+                    <button type="button" class="bg-dark-blue rounded-3 shadow-sm btn-primary " id="update-profile">Save Changes</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %} {% block javascript %}
+<script>
+    const PROFILE_URL = "{% url 'profile_view' %}";
+</script>
+<script src="{% static 'scripts/profile.js'%}"></script>
+{% endblock javascript%}

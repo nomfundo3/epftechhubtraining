@@ -1,0 +1,172 @@
+{% extends 'app_dashboard.html' %} {% load static%} {% block content %} {%if user_type == 'ADMIN'%}
+<div class="row mt-4">
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
+        <div class="card shadow rounded-6">
+            <div class="card-body">
+                <div class="d-flex justify-content-between px-md-1">
+                    <div>
+                        <h4 class="text-red user_count" id="user_count" value="{{user_number}}">{{user_number}}</h4>
+                        <p class="text-xs mb-0 fw-bold text-blue">Total number of users</p>
+                    </div>
+                    <div class="align-self-center text-center">
+                        <span class="dot">
+                            <i class="fas fa-users text-red mt-2 fs-2"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mx-2 view">view</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
+        <div class="card shadow rounded-6">
+            <div class="card-body">
+                <div class="d-flex justify-content-between px-md-1">
+                    <div>
+                        <h4 class="text-red">0</h4>
+                        <p class="text-xs mb-0 fw-bold text-blue">Total no. of docs uploaded</p>
+                    </div>
+                    <div class="align-self-center text-center">
+                        <span class="dot">
+                            <i class="fas fa-file text-red mt-2 fs-2"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mx-2 view">view</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
+        <div class="card shadow rounded-6">
+            <div class="card-body">
+                <div class="d-flex justify-content-between px-md-1">
+                    <div>
+                        <h4 class="text-red">0</h4>
+                        <p class="text-xs mb-0 fw-bold text-blue">Total no. of extracted docs</p>
+                    </div>
+                    <div class="align-self-center text-center">
+                        <span class="dot">
+                            <i class="fas fa-file-download text-red mt-2 fs-2"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mx-2 view">view</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endif%} {%if user_type == 'MANAGER'%}
+<div class="row mt-4">
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
+        <div class="card shadow rounded-6">
+            <div class="card-body">
+                <div class="d-flex justify-content-between px-md-1">
+                    <div>
+                        <h4 class="text-red user_count" id="user_count" value="{{user_number}}">{{user_number}}</h4>
+                        <p class="text-xs mb-0 fw-bold text-blue">Total number of users</p>
+                    </div>
+                    <div class="align-self-center text-center">
+                        <span class="dot">
+                            <i class="fas fa-users text-red mt-2 fs-2 "></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mx-2 view">view</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
+        <div class="card shadow rounded-6">
+            <div class="card-body">
+                <div class="d-flex justify-content-between px-md-1">
+                    <div>
+                        <h4 class="text-red">0</h4>
+                        <p class="text-xs mb-0 fw-bold text-blue">Total no. of docs uploaded</p>
+                    </div>
+                    <div class="align-self-center text-center">
+                        <span class="dot">
+                            <i class="fas fa-file text-red mt-2 fs-2"></i>
+                            </span>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mx-2 view">view</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
+        <div class="card shadow rounded-6">
+            <div class="card-body">
+                <div class="d-flex justify-content-between px-md-1">
+                    <div>
+                        <h4 class="text-red">0</h4>
+                        <p class="text-xs mb-0 fw-bold text-blue">Total no. of extracted docs</p>
+                    </div>
+                    <div class="align-self-center text-center">
+                        <span class="dot">
+                                <i class="bi bi-file-earmark-text text-red fs-2"></i>
+                            </span>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mx-2 view">view</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%} {%if user_type == 'CLERK'%}
+<div class="row mt-4">
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
+        <div class="card shadow rounded-6">
+            <div class="card-body">
+                <div class="d-flex justify-content-between px-md-1">
+                    <div>
+                        <h4 class="text-red">0</h4>
+                        <p class="text-xs mb-0 fw-bold text-blue">Total no. of docs uploaded</p>
+                    </div>
+                    <div class="align-self-center text-center">
+                        <span class="dot">
+                            <i class="fas fa-file text-red mt-2 fs-2"></i>
+                            </span>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mx-2 view">view</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-2">
+        <div class="card shadow rounded-6">
+            <div class="card-body">
+                <div class="d-flex justify-content-between px-md-1">
+                    <div>
+                        <h4 class="text-red">0</h4>
+                        <p class="text-xs mb-0 fw-bold text-blue">Total no. of extracted docs</p>
+                    </div>
+                    <div class="align-self-center text-center">
+                        <span class="dot">
+                            <i class="fas fa-file text-red mt-2 fs-2"></i>
+                            </span>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="mx-2 view">view</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endif%} {%endblock%}

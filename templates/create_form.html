@@ -1,0 +1,93 @@
+{% extends 'app_dashboard.html' %} {% load static %} {% block content %}
+
+<div id="page-content-wrapper">
+    <div class="container mt-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active primary-text fw-bold text-m text-danger " href="idTab" data-bs-toggle="tab">Id</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link primary-text fw-bold text-m" href="passportTab" data-bs-toggle="tab">Passport</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link primary-text fw-bold text-m" href="visaTab" data-bs-toggle="tab">Visa</a>
+                </li>
+
+                <button class="btn btn-danger mt6-6 mr- " type="button" id="btnAddForm" data-bs-toggle="modal" data-bs-target="#formModal">Add Form</button>
+            </ul>
+        </div>
+        <div class="tab-content mt-3">
+            <div class="tab-pane fade show active" id="allUsersTab">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-striped table-hover" id="userTable">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Id No.</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Gender</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="formModalLabelform">Create Form</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="formCreatForm">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="formName" class="form-label">Form Name</label>
+                        <input type="text" class="form-control" id="formName" placeholder="form type" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formfield" class="form-label">Form Field</label>
+                        <input type="text" class="form-control" id="formfield" placeholder="Add form fields here" >
+                        <button type="button" class="btn btn-primary" id="addWordButton">Add Word</button>
+
+                    </div>
+                    
+                    <details>
+                        <summary>Group Box</summary>
+                        <ul id="wordList">
+                            <!-- Words will be added here -->
+                        </ul>
+                    </details>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="submitFormFields">Create Form</button>
+                    </div>
+            </form>
+                    
+                    
+{% endblock %}
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script>
+            const FORM_URL =  "{% url 'create_form_view' %}" ;    
+            const CSRF_TOKEN =  "{{ csrf_token }}";
+    </script>
+    <script src="{% static 'scripts/forms.js' %}"></script>
+{% endblock %}

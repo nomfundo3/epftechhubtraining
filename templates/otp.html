@@ -1,0 +1,26 @@
+{% extends 'login.html' %} {% load static %} {% block content %}
+<h3 class="title fs-4 text-center fw-bold text-capitalize">OTP</h3>
+<span class="text-xs mx-3 mt-3 text-decoration-none">A 4-digit OTP has been sent to your registered mobile number and email address.</span>
+<div id="otp" class="d-flex flex-row">
+    <input class="m-2 text-center form-control rounded border border-primary otp-field " type="text" id="first" maxlength="1" />
+    <input class="m-2 text-center form-control rounded border border-primary otp-field" type="text" id="second" maxlength="1" />
+    <input class="m-2 text-center form-control rounded border border-primary otp-field" type="text" id="third" maxlength="1" />
+    <input class="m-2 text-center form-control rounded border border-primary otp-field" type="text" id="fourth" maxlength="1" />
+
+</div>
+<div class="mt-4 content d-flex justify-content-center align-items-center">
+    <button type="submit" class="btn btn-danger rounded-pill shadow-sm border-0 w-100 validate" id="validate" value="click">Continue</button>
+</div>
+
+<div class="pt-4">
+    <span class="text-xs mx-3 mt-3 text-decoration-none">Didn't get the code? <a id="resend_otp" value="click" class="text-decoration-none ms-3">Resend code</a></span>
+
+</div>
+{% endblock %} 
+{% block javascript %}
+<script>
+    const RESEND_URL = "{% url 'resend_otp' %}";
+</script>
+<script src="{% static 'scripts/otp.js'%}"></script>
+<script src="{% static 'scripts/resent.js'%}"></script>
+{% endblock %}

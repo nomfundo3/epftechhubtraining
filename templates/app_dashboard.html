@@ -1,0 +1,302 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no,maximum-scale=1.0,user-scalable=0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" /> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <title>{%block title%}Deep-OCR Dashboard{%endblock%}</title>
+
+
+</head>
+
+<body>
+    {%if user_type == 'ADMIN'%}
+    <div class="sidebar shadow ">
+        <div class="logo-details mx-4 mt-4 mb-4 pt-5 ">
+            <h2>
+                <img src="{% static 'images/deep-ocr logo.png' %}" height="100" width="300">
+            </h2>
+        </div>
+        <hr class="horizontal text-secondary m-0 p-0 ">
+        <ul class="nav-links ">
+            <a class="nav-link collapsed " href="{% url 'app_dashboard'%}" data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Dashboard</span>
+            </a>
+            <li>
+                <a href="{% url 'app_dashboard'%}">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name ">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name ">Dashboard</a></li>
+                </ul>
+            </li>
+            <a class="nav-link collapsed " href="# " data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Account</span>
+            </a>
+            <li>
+                <a href="{% url 'profile_view'%}">
+                    <i class='bx bx-user-circle'></i>
+                    <span class="link_name ">Profile</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="">Profile</a></li>
+                </ul>
+            </li>
+
+            <a class="nav-link collapsed " href="# " data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Management</span>
+            </a>
+            <li>
+                <a href="{%  url 'users_view' %}">
+                    <i class='bx bx-group'></i>
+                    <span class="link_name ">Users</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="{%  url 'users_view' %}">Users</a></li>
+                </ul>
+            </li>
+
+
+            <a class="nav-link collapsed " href="" data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Projects</span>
+            </a>
+            <li>
+                <a href="{%  url 'create_project_view' %}">
+                    <i class='bx bx-task'></i>
+                    <span class="link_name ">Projects</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="{%  url 'create_project_view' %}">Projects</a></li>
+                </ul>
+            </li>
+            <a class="nav-link collapsed " href="# " data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Analytics</span>
+            </a>
+            <li>
+                <a href="{%url 'graphs_view'%}">
+                    <i class='bx bx-bar-chart-alt'></i>
+                    <span class="link_name ">Graphs</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="{%url 'graphs_view'%}">Graphs</a></li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a id="logout_b">
+                    <i class='bx bx-log-out-circle'></i>
+                    <span class="link_name ">Logout</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="#">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    </div>
+    {%endif%} {%if user_type == 'MANAGER'%}
+    <div class="sidebar shadow ">
+        <div class="logo-details mx-4 mt-4 mb-4 pt-5 ">
+            <h2>
+                <img src="{% static 'images/deep-ocr logo.png' %}" height="100" width="300">
+            </h2>
+        </div>
+        <hr class="horizontal text-secondary m-0 p-0 ">
+        <ul class="nav-links ">
+            <a class="nav-link collapsed " href="{% url 'app_dashboard'%}" data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Dashboard</span>
+            </a>
+            <li>
+                <a href="{% url 'app_dashboard'%}">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name ">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name ">Dashboard</a></li>
+                </ul>
+            </li>
+            <a class="nav-link collapsed " href="# " data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Account</span>
+            </a>
+            <li>
+                <a href="{% url 'profile_view'%}">
+                    <i class='bx bx-user-circle'></i>
+                    <span class="link_name ">Profile</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="">Profile</a></li>
+                </ul>
+            </li>
+
+            <a class="nav-link collapsed " href="# " data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Management</span>
+            </a>
+            <li>
+                <a href="{%  url 'users_view' %}">
+                    <i class='bx bx-group'></i>
+                    <span class="link_name ">Users</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="{%  url 'users_view' %}">Users</a></li>
+                </ul>
+            </li>
+
+
+            <a class="nav-link collapsed " href="" data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Projects</span>
+            </a>
+            <li>
+                <a href="{%  url 'create_project_view' %}">
+                    <i class='bx bx-task'></i>
+                    <span class="link_name ">Projects</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="{%  url 'create_project_view' %}">Projects</a></li>
+                </ul>
+            </li>
+            <a class="nav-link collapsed " href="# " data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Analytics</span>
+            </a>
+            <li>
+                <a href="{%url 'graphs_view'%}">
+                    <i class='bx bx-bar-chart-alt'></i>
+                    <span class="link_name ">Graphs</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="{%url 'graphs_view'%}">Graphs</a></li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a id="logout_b">
+                    <i class='bx bx-log-out-circle'></i>
+                    <span class="link_name ">Logout</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="#">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    </div>
+    {%endif%} {%if user_type == 'CLERK'%}
+    <div class="sidebar shadow ">
+        <div class="logo-details mx-4 mt-4 mb-4 pt-5 ">
+            <h2>
+                <img src="{% static 'images/deep-ocr logo.png' %}" height="100" width="300">
+            </h2>
+        </div>
+        <hr class="horizontal text-secondary m-0 p-0 ">
+        <ul class="nav-links ">
+            <a class="nav-link collapsed " href="{% url 'app_dashboard'%}" data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Dashboard</span>
+            </a>
+            <li>
+                <a href="{% url 'app_dashboard'%}">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name ">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name ">Dashboard</a></li>
+                </ul>
+            </li>
+            <a class="nav-link collapsed " href="# " data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Account</span>
+            </a>
+            <li>
+                <a href="{% url 'profile_view'%}">
+                    <i class='bx bx-user-circle'></i>
+                    <span class="link_name ">Profile</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="">Profile</a></li>
+                </ul>
+            </li>
+
+            <a class="nav-link collapsed " href="" data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Projects</span>
+            </a>
+            <li>
+                <a href="{%  url 'create_project_view' %}">
+                    <i class='bx bx-task'></i>
+                    <span class="link_name ">Projects</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="{%  url 'create_project_view' %}">Projects</a></li>
+                </ul>
+            </li>
+            <a class="nav-link collapsed " href="# " data-toggle="collapse " data-target="#collapseUtilities " aria-expanded="true " aria-controls="collapseUtilities ">
+                <span class="text-light ">Analytics</span>
+            </a>
+            <li>
+                <a href="{%url 'graphs_view'%}">
+                    <i class='bx bx-bar-chart-alt'></i>
+                    <span class="link_name ">Graphs</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="{%url 'graphs_view'%}">Graphs</a></li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a id="logout_b">
+                    <i class='bx bx-log-out-circle'></i>
+                    <span class="link_name ">Logout</span>
+                </a>
+                <ul class="sub-menu blank ">
+                    <li><a class="link_name " href="#">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    </div>
+    {%endif%}
+
+    <section class="home-section ">
+
+        <nav class="navbar navbar-expand-sm px-3 text-blue ">
+            <div class="d-flex align-items-center ">
+                <i class="bx bx-menu text-blue fs-4 d-md-none "></i>
+                <p class="text-xxs mt-3 ">{%block navbar%}Dashboard {%endblock%}/<span class="fw-bold ">{{user_type}}</span></p>
+            </div>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+                <li> <i class="fa-solid fa-user text-blue me-2 text-xxs "></i><span class="text-xxs ">{{fullname}}</span></li>
+            </ul>
+        </nav>
+
+        <div class="container-fluid ">
+            {%block content%}{%endblock%}
+        </div>
+
+    </section>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js " integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p " crossorigin="anonymous "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js " integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF " crossorigin="anonymous "></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js "></script>
+    <script src="https://kit.fontawesome.com/76914c045c.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script src="{% static 'scripts/logout.js'%}"></script>
+    <script src="{% static 'scripts/count.js'%}"></script>
+    <script src="{% static 'scripts/dashboard.js'%}">
+    </script>
+
+    <script>
+        const LOGIN_URL = "{% url 'login_view' %}";
+        const LOGOUT_URL = "{% url 'logout_view' %}";
+        const CSRF_TOKEN = "{{ csrf_token }}";
+    </script>
+    </script> {% block javascript %} {% endblock javascript%}
+
+</html>

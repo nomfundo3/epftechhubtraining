@@ -1,0 +1,255 @@
+{% extends 'app_dashboard.html' %}
+ {% load static %}
+  {%block navbar%}USERS{%endblock%} 
+  {% block content %}
+
+
+  <div class="card shadow-sm mt-5 rounded-6">
+    <div class="card-header bg-white border-0 rounded-6">
+     
+        <button class="btn btn-danger float-left text-xs shadow rounded-3 btn-sm " type="button" id="btnStart" data-bs-toggle="modal" data-bs-target="#form_modal">Create User</button>
+
+        <ul class="nav nav-tabs mt-3 border-bottom-0">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#allUsersTab" href="allUsersTab">All Users</a>
+            </li>
+            {% if user_type == 'ADMIN' %}
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#managersTab" href="managersTab">Managers</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#clerkTab" href="clerkTab">Clerks</a>
+            </li>
+        </ul>
+     
+    </div>
+    
+        <div class="card-body">
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="allUsersTab">
+                    <table class="table data-table table-hover mt-2" id="userTable">
+                        <thead class="text-xs bg-dark-blue text-white fw-light">
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>User Type</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-xxs">
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user.first_name }}</td>
+                                <td>{{ user.last_name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.phone_number__profile }}</td>
+                                <td>{{user.user_type__type}}</td>
+                                <td>
+                                    <button class="bg-dark-blue rounded-3 shadow-sm btn-primary w-30 me-2 text-white" type="button" data-bs-toggle="modal" 
+                                    data-bs-target="#form_update_modal"
+                                    data-user-id="{{ user.id }}" 
+                                    data-first-name="{{ user.first_name }}" 
+                                    data-last-name="{{ user.last_name }}"
+                                    data-user-email="{{ user.email }}"
+                                    data-phone-number="{{ user.phone_number__profile }}">
+                                    Update
+                                    </button>
+                                <button class="delete-button rounded-3 shadow-sm btn-danger w-30 me-3 text-white delete_selected_user" type="button" data-user-id="{{ user.id }}" value="{{ user.id}}">Delete</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+             </div>
+
+             <div class="tab-pane fade show" id ="managersTab" >
+                <table class="table data-table table-hover" id="userTable">
+                    <thead class="text-xs bg-dark-blue text-white">
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>User Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-xxs">
+                        {% for user in users %}
+                        {% if user.user_type__type == 'MANAGER' %}
+                        <tr>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone_number__profile }}</td>
+                            <td>{{user.user_type__type}}</td>
+                            <td>
+                                <button class="bg-dark-blue rounded-3 shadow-sm btn-primary w-30 me-2 text-white" type="button" data-bs-toggle="modal" 
+                                data-bs-target="#form_update_modal"
+                                data-user-id="{{ user.id }}" 
+                                data-first-name="{{ user.first_name }}" 
+                                data-last-name="{{ user.last_name }}"
+                                data-user-email="{{ user.email }}"
+                                data-phone-number="{{ user.phone_number__profile }}">
+                                Update
+                                </button>
+                            <button class="delete-button rounded-3 shadow-sm btn-danger w-30 me-3 text-white delete_selected_user btn-sm" type="button" data-user-id="{{ user.id }}" value="{{ user.id}}">Delete</button>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+             
+            </div>
+
+            <div class="tab-pane fade show" id="clerkTab">
+                <table class="table data-table table-hover" id="userTable">
+                    <thead class="text-xs bg-dark-blue text-white">
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>User Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-xxs">
+                        {% for user in users %}
+                        {% if user.user_type__type == 'CLERK' %}
+                        <tr>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone_number__profile }}</td>
+                            <td>{{user.user_type__type}}</td>
+                            <td>
+                                <button class="bg-dark-blue rounded-3 shadow-sm btn-primary w-30 me-2 text-white" type="button" data-bs-toggle="modal" 
+                                data-bs-target="#form_update_modal"
+                                data-user-id="{{ user.id }}" 
+                                data-first-name="{{ user.first_name }}" 
+                                data-last-name="{{ user.last_name }}"
+                                data-user-email="{{ user.email }}"
+                                data-phone-number="{{ user.phone_number__profile }}">
+                                Update
+                                </button>
+                            <button class="delete-button rounded-3 shadow-sm btn-danger w-30 me-3 text-white delete_selected_user" type="button" data-user-id="{{ user.id }}" value="{{ user.id}}">Delete</button>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>  
+      </div>
+
+        <div class="modal fade" id="form_modal" tabindex="-1" aria-labelledby="form_modal_label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="formModalLabel">Create User</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="register_form">
+                        <div class="modal-body">
+                            
+                            <div class="mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter first name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="surname" placeholder="Enter last name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail Address</label>
+                                <input type="email" class="form-control" id="email" placeholder="CWilliams@email.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="number" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" id="number" maxlength="10" placeholder="Enter phone number" onkeypress="return isNumber(event)" required>
+                            </div>
+
+                            <div class="mb-3" >
+                                <label for="userType" class="form-label">User Type</label>
+                             
+                                <select class="form-select" id="userType">
+                               <option value="" hidden >Select User Type</option>
+                               {% for type in user_types %}
+                                {% if user_type == 'ADMIN' %}
+                                   <option value="{{ type.id }}">{{ type.type }}</option>
+                                 {% elif user_type == 'MANAGER' and type.type == 'CLERK' %}
+                                   <option value="{{ type.id }}">{{ type.type }}</option>
+                                 {% endif %}
+                               {% endfor %}
+                             </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" id="create_user">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% for user in users %}
+<div class="modal fade" id="form_update_modal" tabindex="-1" aria-labelledby="form_modal_label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="formModalLabel">Update User</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <form id="update_form">
+                <div class="modal-body">
+                    <div class="mb-3">
+                       <input type="hidden" id="user_id" name="user_id">
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_Name" placeholder="Enter first name"  required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_Name" placeholder="Enter last name"  required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail Address</label>
+                        <input type="email" class="form-control" id="email_a" placeholder="CWilliams@email.com"  required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="number" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="number_update" maxlength="10" placeholder="Enter phone number" onkeypress="return isNumber(event)" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger user_update" id="save">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>   
+    </div>
+</div>
+{% endfor %} 
+ 
+{% endblock %}
+{% block javascript %}
+    <script>
+    var USERS_URL = "{% url 'users_view' %}"
+    var UPDATE_USER = "{% url 'user_update_view'%}"
+    var DELETE_USER_URL = "{% url 'delete_user_view'%}"
+    </script>
+    <script src="{% static 'scripts/users.js'%}"></script>
+{% endblock javascript %}
+                

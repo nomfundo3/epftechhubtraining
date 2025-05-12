@@ -1,0 +1,114 @@
+ {% extends 'app_dashboard.html' %} 
+ {% load static %} 
+ {%block navbar%}PROJECTS{%endblock%} 
+ 
+ {% block content %}
+
+ <div class="tab-content mt-3">
+  <div class="tab-pane fade show active" id="allUsersTab"> 
+     <div class="card shadow-sm mt-5 rounded-6">
+      <div class="card-body rounded">
+        <div class="d-flex">
+          <button class="btn btn-danger float-left text-xs shadow rounded-3 btn-sm mb-3" type="button" id="btnStart" data-bs-toggle="modal" data-bs-target="#formModal">Create Project</button>
+
+      </div>
+        <table class="table data-table table-hover" id="projectTable">
+            <thead class="text-s bg-dark-blue text-white">
+              
+                <tr>
+                    
+                    <th>Project Name</th>
+                    <th>Project Description</th>
+                    <th>Date Created</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            
+            <tbody class="text-s">
+              {% for project in projects %}
+                <tr class="text-s">
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.description }}</td>
+                    <td>{{ project.date_created }}</td>
+                    <td class="text-s">
+                      <button class="bg-dark-blue rounded-3 shadow-sm btn-primary  w-30  me-3 text-white" type="button" data-project-id="{{ project.id }}">View</button>
+                      <button class="btn-asign rounded-3 shadow-sm btn-danger w-30 me-3 text-white" type="button" data-project-id="{{ project.id }}">Assign Clerk</button>
+                      <button class="bg-dark-blue rounded-3 shadow-sm btn-primary w-30  me-3 text-white update_project_btn" type="button" data-project_id="{{ project.id }}" id="{{project.id}}" data-bs-target="#update_form_modal_{{ project.id }}" data-bs-toggle="modal">Update</button>
+                      <button class="rounded-3 shadow-sm btn-danger w-30  me-3 text-white delete_project_button" data-project_id="{{ project.id }}">Delete</button>
+                      
+                      <div class="modal fade" id="update_form_modal_{{ project.id }}" tabindex="-1" aria-labelledby="form_modal_label" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="formModalLabel">Update Project</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+            
+                                <div class="modal-body">
+                                    <form id="update_project_form">
+                                    <div class="mb-3">
+                                        <label for="updateprojectName" class="form-label">Project Name</label>
+                                        <input type="text" class="form-control" id="name_{{ project.id }}" data-project_name="{{project.name}}"placeholder="My Project" value="{{project.name}}" required>
+                                    </div>
+                                  <div class="mb-3">
+                                      <label for="updateprojectDescription" class="form-label">Project Description</label>
+                                      <textarea class="form-control" id="description_{{ project.id }}" rows="4" value="" required>{{project.description}}</textarea>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                          <button type="submit" class="btn btn-primary updateButton update_submit" data-id="{{project.id}}">Update</button>
+                                      </div>
+                                      <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+                                      <div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                  </td>
+            </tbody>
+            {% endfor %}
+        </table>
+      </div>
+    </div>  
+</div>
+
+<form id="CreateProjectForm">
+  {% csrf_token %}
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h3 class="modal-title" id="formModalLabel">Create Project</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="projectName" class="form-label">Project Name</label>
+                <input type="text" class="form-control" id="projectName" placeholder="My Project" required>
+              </div>
+              <div class="mb-3">
+                <label for="projectDescription" class="form-label">Project Description</label>
+                <textarea class="form-control" id="projectDescription" rows="4" required></textarea>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" id="createProject">Create</button>
+            </div>
+            <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+            <div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+          </form>
+        </div>
+    </div>
+
+      
+    
+{% endblock %} {% block javascript %}
+<script>
+  const PROJECTS_URL = "{% url 'create_project_view' %}";
+  const UPDATE_PROJECT_URL = "{% url 'update_project_view' %}";
+  const DELETE_PROJECT_URL = "{% url 'delete_project_view' %}";
+  
+
+</script>
+<script src="{% static 'scripts/create_project.js' %}"></script>
+{% endblock javascript %}
