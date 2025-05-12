@@ -1,0 +1,3 @@
+ADMIN = "ADMIN"
+CLERK = "CLERK" 
+OTP_TYPE = "Enter_OTP"
